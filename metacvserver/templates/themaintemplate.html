@@ -1,0 +1,45 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<html>
+  <head>
+    <title>{% trans "My meta-cv"%}</title>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static "cv/themaintemplate.css"%}" type="text/css"/>
+  </head>
+  <body>
+    <header>
+        <h1>{% trans "Florent Pastor's meta-cv"%}<small></small></h1>
+        <p>{% trans "20 years old, french developper."%}</p>
+    </header>
+    <div class="block" id="state_mainpage" >
+      <div >
+        <p>{%trans "Discover my experiences, categorized by #skills."%}</p>
+        <p class="hashtags">
+        {% for hashtag in hashtags %}
+        <a href="/{{hashtag.id}}/">#{{hashtag.id}}</a>
+        {% endfor %}
+      </p>
+      </div>
+    </div>
+    <div class="block" id="state_openhashtag">
+      <div >
+        <a href="/">Close</a>
+        <h1>#<span id="hashtag_title"></span></h1>
+        <p>experience/skill</p>
+        <div id="feature_representation"></div>
+        <a href="" id="next_hashtag">{% trans "Next" %}</a>
+      </div>
+    </div>
+    <footer>
+      <p>This is a meta-cv, meaning its code is also design to show my skills. Come and discover it on <a href="http://github.com/pfif/meta-cv">GitHub !</a></p>
+    </footer>
+    {% if hashtag or feature %}
+    <script type="text/javascript">
+    HASHTAG_ID = "{{hashtag.id}}"
+    FEATURE_ID = "{{feature.id}}"
+    </script>
+    {%endif%}
+    <script type="application/dart" src="{% static "cv/themaintemplate_bootstrap.dart"%}"> </script>
+   </body>
+</html> 

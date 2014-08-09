@@ -1,0 +1,148 @@
+/*Position*/
+.block{
+  width: -moz-available;
+  width: -webkit-fill-available;
+}
+
+#state_mainpage > div, footer, header{
+  width: -moz-available;
+  width: -webkit-fill-available;
+  margin-left:15%;
+  margin-right:15%;
+  
+  text-align: center;
+}
+
+#state_openhashtag > div{
+  width: 50%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:50px;
+}
+
+/*Appearance*/
+*{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+header{
+  border-bottom: 2px dotted black;
+}
+
+footer{
+  border-top : 2px dotted black;
+}
+
+header h1{
+  font-size:3em; 
+  margin-bottom:2px;
+}
+
+header h1+p{
+  margin-top:0px;
+  font-style: italic;
+}
+
+#state_mainpage p{
+  margin-top:15px;
+  margin-bottom:20px;
+}
+
+#state_mainpage > div{
+  transition-property:opacity;
+  transition-duration:300ms;
+}
+
+#state_mainpage.hidden > div{
+  opacity:0.5;
+}
+
+#state_mainpage .hashtags{
+  line-height:3em;  
+} 
+
+#state_mainpage .hashtags > a {
+  color:black;
+  text-decoration:none;
+  font-size:2em;
+  margin-left:5px;
+}
+
+
+#state_mainpage > div > a:hover, #next_hashtag:hover{
+  text-decoration:underline; 
+}
+
+#state_openhashtag{
+  overflow:hidden;
+}
+#state_openhashtag> div{
+  transition-property:transform;
+  transition-duration:300ms;
+  transform:scaleY(1);
+}
+
+#state_openhashtag > div > *{
+  padding:5px;
+}
+
+#state_openhashtag.hidden {
+  height: 0px;
+}
+
+#state_openhashtag.hidden > div{
+  transform:scaleY(0);
+}
+
+#state_openhashtag h1 {
+  font-size: 1em;
+  text-align: center;
+  margin-bottom : 1px;
+  padding:5px;
+}
+
+#next_hashtag, #state_openhashtag h1{
+  display:block;
+  margin:0;
+}
+
+#next_hashtag{
+  color:black;
+  text-decoration:none;
+  text-align:right;
+}
+
+#state_openhashtag > div > p{
+  text-align:left;
+  font-style:italic;
+  margin:0;
+}
+
+#state_openhashtag > div > a[href="/"]:not(#next_hashtag){
+  float:right;
+  background-color:black;
+  color:white;
+  text-decoration:none;
+  padding:5px
+}
+
+#feature_representation h2, #feature_representation p{
+margin:0;
+margin-bottom:5px;
+}
+
+#feature_representation h2{
+  margin-bottom:10px !important;
+}
+
+#main_representation {
+  background-color:#e2e2e2;
+  border-bottom: none;
+  padding:10px;
+}
+
+#feature_representation #explanation{
+  background-color:#d2d2d2;
+  margin:0;
+  padding:5px;
+}
