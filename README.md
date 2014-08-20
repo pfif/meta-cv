@@ -5,7 +5,7 @@ Hi, my name is Florent Pastor.
 This is my meta-cv, which is a website coded with Django and Dart containing an interactive CV, 
 but also a showcase of my skills with those two technologies.
 
-It is running on [http://vps89599.ovh.net](http://vps89599.ovh.net).
+It is running on [http://heymistertree.fr](http://heymistertree.fr).
 
 This document will walk you through the project, specifying which of my skills were used for that project.
 
@@ -13,7 +13,7 @@ Git
 ---
 I am used to the version control system Git. 
 
-Clarifications to understand how my skills are shown by this repo : All you can see, for now, is simply one branch with two commits.
+Clarifications to understand how my skills are shown by this repo : All you can see, for now, is simply one branch with four commits, including only one large where all the system is created.
 There is more : On my computer's repo, I have one other branch on which I developed the first version of the system. 
 Around 20 commits were needed to complete the version, but since none of them except the last one represents interesting code,
 I decided not to publish them in public, and to rebase and compress them on the branch master in one big commit.
