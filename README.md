@@ -5,7 +5,7 @@ Hi, my name is Florent Pastor.
 This is my meta-cv, which is a website coded with Django and Dart containing an interactive CV, 
 but also a showcase of my skills with those two technologies.
 
-Check it out on [http://heymistertree.fr](http://heymistertree.fr), you will need to see it running to understand its code.
+Check it out on ~~http://heymistertree.fr~~ (website temporarily down), you will need to see it running to understand its code.
 
 This document will walk you through the project, specifying which of my skills were used for its development.
 
