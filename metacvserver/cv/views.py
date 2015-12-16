@@ -1,4 +1,11 @@
-from django.shortcuts import render
+"""
+View of the CV module.
+All these views are based on the same template : themaintemplate.html and are
+only a way to load it differently, namely :
+* In its default state, showing all the hashtags
+* With a hashtag loaded
+* With a feature loaded in a hashtag
+"""
 from cv.models import Hashtag
 from django.template.loader import get_template
 from django.template import Context
@@ -7,70 +14,79 @@ from django.utils import simplejson
 
 #The Main Template's utils
 def get_maintemplate_context():
-  hashtags = Hashtag.objects.all()
-  return Context({"hashtags" : hashtags})
+    """Used by all the following function to get the context basic context for
+       The Main Template"""
+    hashtags = Hashtag.objects.all()
+    return Context({"hashtags" : hashtags})
 
 def maintemplate_loader(hashtag=None, feature=None):
-  c = get_maintemplate_context()
-  if hashtag != None:
-    c['hashtag'] = hashtag
+    """Render The Main Template with the given Hashtag, possibly at a precise 
+       Feature open"""
+    ctx = get_maintemplate_context()
+    if hashtag != None:
+        ctx['hashtag'] = hashtag
 
-  if feature != None:
-    c['feature'] = feature
-  elif hashtag != None:
-    c['feature'] = hashtag.features.all()[0]
-  t = get_template("themaintemplate.html")
-  return t.render(c)
+    if feature != None:
+        ctx['feature'] = feature
+    elif hashtag != None:
+        ctx['feature'] = hashtag.features.all()[0]
+    template = get_template("themaintemplate.html")
+    return template.render(ctx)
 
 #The views
 def mainpage(request):
-  return HttpResponse(maintemplate_loader())
+    """Returns The Main Template in its default state"""
+    return HttpResponse(maintemplate_loader())
 
 def hashtag(request, hashtag_id):
-  print(request.META)
-  try:
-    hashtag = Hashtag.objects.get(id=hashtag_id)
-  except Hashtag.DoesNotExist:
-    return mainpage(request)
-  if request.is_ajax() :
-    response = dict()
-    response['id'] = hashtag.id
-    response['first_feature'] = hashtag.features.all()[0].id
-    
-    response_json = simplejson.dumps(response)
-    return HttpResponse(response_json, content_type='application/json')
-  else:
-    return HttpResponse(maintemplate_loader(hashtag))
+    """Returns The Main Template with a hashtag open"""
+    try:
+        hashtag = Hashtag.objects.get(id=hashtag_id)
+    except Hashtag.DoesNotExist:
+        return mainpage(request)
+    if request.is_ajax():
+        response = dict()
+        response['id'] = hashtag.id
+        response['first_feature'] = hashtag.features.all()[0].id
+
+        response_json = simplejson.dumps(response)
+        return HttpResponse(response_json, content_type='application/json')
+    else:
+        return HttpResponse(maintemplate_loader(hashtag))
 
 def feature(request, hashtag_id, feature_id):
-  try:
-    hashtag = Hashtag.objects.get(id=hashtag_id)
-  except Hashtag.DoesNotExist:
-    return mainpage(request)
-  feature = None
-  next_feature = None
+    """Returns The Main Template with the given Hashtag at a precise Feature 
+       open"""
+    try:
+        hashtag = Hashtag.objects.get(id=hashtag_id)
+    except Hashtag.DoesNotExist:
+        return mainpage(request)
+    feature = None
+    next_feature = None
 
-  #search for the feature
-  #and the one after it
-  for f in hashtag.features.all():
-    if(f.id == feature_id):
-      feature = f
-    elif(feature != None and next_feature == None):
-      next_feature = f
-  
-  if feature == None:
-    return mainpage(request)  
+    #search for the feature
+    #and the one after it
+    for feature_itr in hashtag.features.all():
+        if feature_itr.id == feature_id:
+            feature = feature_itr
+        elif feature is not None and next_feature is None:
+            next_feature = feature_itr
 
-  if request.is_ajax() :
-    response = dict()
-    response['id'] = feature.id
-    response['representation'] = feature.link_set.get(hashtag=hashtag).getrepresentation()
-    if next_feature != None :
-      response['next_feature_id'] = next_feature.id
-    else :
-      response['next_feature_id'] = "CLOSE"
+    if feature is None:
+        return mainpage(request)
 
-    response_json = simplejson.dumps(response)
-    return HttpResponse(response_json, content_type='application/json')
-  else:
-    return HttpResponse(maintemplate_loader(hashtag, feature))
+    if request.is_ajax():
+        response = dict()
+        response['id'] = feature.id
+        response['representation'] = (
+            feature.link_set.get(hashtag=hashtag).getrepresentation()
+        )
+        if next_feature != None:
+            response['next_feature_id'] = next_feature.id
+        else:
+            response['next_feature_id'] = "CLOSE"
+
+        response_json = simplejson.dumps(response)
+        return HttpResponse(response_json, content_type='application/json')
+    else:
+        return HttpResponse(maintemplate_loader(hashtag, feature))

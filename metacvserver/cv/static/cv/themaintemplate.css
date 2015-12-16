@@ -76,22 +76,23 @@ header h1+p{
 #state_openhashtag{
   overflow:hidden;
 }
-#state_openhashtag> div{
-  transition-property:transform;
-  transition-duration:300ms;
-  transform:scaleY(1);
-}
-
-#state_openhashtag > div > *{
-  padding:5px;
-}
 
 #state_openhashtag.hidden {
   height: 0px;
 }
 
+#state_openhashtag> div {
+  transition-property:transform;
+  transition-duration:300ms;
+  transform:scaleY(1);
+}
+
 #state_openhashtag.hidden > div{
   transform:scaleY(0);
+}
+
+#state_openhashtag > div > *{
+  padding:5px;
 }
 
 #state_openhashtag h1 {
@@ -127,8 +128,8 @@ header h1+p{
 }
 
 #feature_representation h2, #feature_representation p{
-margin:0;
-margin-bottom:5px;
+  margin:0;
+  margin-bottom:5px;
 }
 
 #feature_representation h2{

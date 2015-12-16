@@ -13,17 +13,17 @@
         <p>{% trans "20 years old, french developper."%}</p>
     </header>
     <div class="block" id="state_mainpage" >
-      <div >
+      <div>
         <p>{%trans "Discover my experiences, categorized by #skills."%}</p>
         <p class="hashtags">
-        {% for hashtag in hashtags %}
-        <a href="/{{hashtag.id}}/">#{{hashtag.id}}</a>
-        {% endfor %}
-      </p>
+            {% for hashtag in hashtags %}
+            <a href="/{{hashtag.id}}/">#{{hashtag.id}}</a>
+            {% endfor %}
+        </p>
       </div>
     </div>
     <div class="block" id="state_openhashtag">
-      <div >
+      <div>
         <a href="/">Close</a>
         <h1>#<span id="hashtag_title"></span></h1>
         <p>experience/skill</p>

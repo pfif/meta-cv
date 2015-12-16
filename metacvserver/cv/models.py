@@ -1,59 +1,75 @@
+"""
+Models for the CV
+
+Contains three models :
+- Feature : One of my experiences or characteristics
+- Hashtag : Hashtags are used to categorized Features
+- Link : Materialise the relationship between Features and Hashtags and provide
+         an explanation for it
+"""
 from django.db import models
 from django.template import Context
 from django.template.loader import get_template
 from django.contrib import admin
 
 class Feature(models.Model):
-  """A feature describe one of my experiences or characteristics.
-  A feature provide its representation in HTML.
-  """
-  id = models.SlugField(primary_key=True)
-  title = models.CharField(max_length = 50) 
-  description = models.TextField()
+    """A feature describe one of my experiences or characteristics.
+    A feature provide its representation in HTML.
+    """
+    id = models.SlugField(primary_key=True)
+    title = models.CharField(max_length=50)
+    description = models.TextField()
 
-  def getmainrepresentation(self):
-    c = Context({"feature" : self})
-    return get_template("textfeature.html").render(c)
-  
-  def __str__(self):
-    return self.id
+    def getrepresentation(self):
+        """Return the basic HTML representation of the Feature"""
+        ctx = Context({"feature" : self})
+        return get_template("textfeature.html").render(ctx)
+
+    def __str__(self):
+        return self.id
 
 admin.site.register(Feature)
 
 
 class Hashtag(models.Model):
-  """A hashtag categorize the features
+    """A hashtag categorize the features
 
-  It is link to them thanks to the link class.
-  """
-  id = models.SlugField(primary_key=True)
-  features = models.ManyToManyField(Feature, through='Link')
+    It is link to them thanks to the link class.
+    """
+    id = models.SlugField(primary_key=True)
+    features = models.ManyToManyField(Feature, through='Link')
 
-  def __str__(self):
-    return self.id
+    def __str__(self):
+        return self.id
 admin.site.register(Hashtag)
 
 class Link(models.Model):
-  """A hashtag is linked to several feature. A Link is the object materialise this relation. It also contain an explanation to it .
-  
-  A link provide the HTML representation of its explanation.
-  The HTML representation of the Feature in relation is also provided by a Link
-  """
+    """A hashtag is linked to several feature.
+    A Link materialise this relation while providing an explanation for it.
 
-  feature = models.ForeignKey(Feature)
-  hashtag = models.ForeignKey(Hashtag)
+    A link provide the HTML representation of its explanation.
+    The HTML representation of the Feature in relation is also provided by a
+    Link
+    """
 
-  explanation = models.TextField()
+    feature = models.ForeignKey(Feature)
+    hashtag = models.ForeignKey(Hashtag)
 
-  def getexplanationrepresentation(self):
-    c = Context({"representation": self.explanation})
-    return get_template("textlink.html").render(c)
+    explanation = models.TextField()
 
-  def getrepresentation(self):
-    """Return the representation of the Feature in relation to the hashtag."""
-    c = Context({'main_representation' : self.feature.getmainrepresentation(), 'explanation' : self.getexplanationrepresentation()})
-    return get_template("representation_feature.html").render(c)
+    def getexplanationrepresentation(self):
+        """Get the representation of the explanation to the link only"""
+        ctx = Context({"representation": self.explanation})
+        return get_template("textlink.html").render(ctx)
 
-  def __str__(self):
-    return self.hashtag.__str__()+"=>"+self.feature.__str__()
+    def getrepresentation(self):
+        """Return the Feature's representation in relation to the Hashtag."""
+        ctx = Context(
+            {'main_representation' : self.feature.getrepresentation(),
+             'explanation' : self.getexplanationrepresentation()}
+        )
+        return get_template("representation_feature.html").render(ctx)
+
+    def __str__(self):
+        return self.hashtag.__str__()+"=>"+self.feature.__str__()
 admin.site.register(Link)

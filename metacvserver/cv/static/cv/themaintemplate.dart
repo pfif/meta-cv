@@ -26,6 +26,7 @@ class StateManager{
     this.div_state_mainpage = div_state_mainpage;
     this.div_state_openhashtag = div_state_openhashtag;
   }
+
   //Show element if it is equal to e
   void _showelementif(Element e, Element element){
     if(e == element){
@@ -127,7 +128,6 @@ class OpenHashtagManager{
     window.history.replaceState("cityoftinylight", "", "/");
   }
 
-  //HOOKS
   /*If next is none : switch to the Main Screen State
     Otherwise : load the next feature*/
   void nextFeature(){
