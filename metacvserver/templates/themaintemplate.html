@@ -41,5 +41,18 @@
     </script>
     {%endif%}
     <script type="application/dart" src="{% static "cv/themaintemplate_bootstrap.dart"%}"> </script>
+    <script type="text/javascript">
+    if (navigator.userAgent.indexOf('(Dart)') === -1) {
+        var scripts = document.getElementsByTagName("script");
+        for(var i=0; i < scripts.length; i++){
+            if (scripts[i].src && scripts[i].src != ''){
+                var script = document.createElement('script');
+                script.src = scripts[i].src.replace(/\.dart/, '.js');
+                var parent = scripts[i].parentNode;
+                parent.replaceChild(script, scripts[i]);
+            }
+        }
+    }
+    </script>
    </body>
 </html> 

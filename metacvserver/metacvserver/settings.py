@@ -59,8 +59,11 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': 'db',
+        'NAME': 'metacvserver',
+        'USER': 'monsieurarbre',
+        'PASSWORD' : 'pLTm3gAyZi9KNXQ2n9ZEN4EQzTmbg4emmDkyEiq82KpDXpVFTe'
     }
 }
 
@@ -82,3 +85,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    '/var/django/metacvserver_compiledjs/'
+]
