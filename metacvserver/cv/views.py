@@ -6,11 +6,11 @@ only a way to load it differently, namely :
 * With a hashtag loaded
 * With a feature loaded in a hashtag
 """
+import json
 from cv.models import Hashtag
 from django.template.loader import get_template
 from django.template import Context
 from django.http import HttpResponse
-from django.utils import simplejson
 
 #The Main Template's utils
 def get_maintemplate_context():
@@ -49,7 +49,7 @@ def hashtag(request, hashtag_id):
         response['id'] = hashtag.id
         response['first_feature'] = hashtag.features.all()[0].id
 
-        response_json = simplejson.dumps(response)
+        response_json = json.dumps(response)
         return HttpResponse(response_json, content_type='application/json')
     else:
         return HttpResponse(maintemplate_loader(hashtag))
@@ -86,7 +86,7 @@ def feature(request, hashtag_id, feature_id):
         else:
             response['next_feature_id'] = "CLOSE"
 
-        response_json = simplejson.dumps(response)
+        response_json = json.dumps(response)
         return HttpResponse(response_json, content_type='application/json')
     else:
         return HttpResponse(maintemplate_loader(hashtag, feature))

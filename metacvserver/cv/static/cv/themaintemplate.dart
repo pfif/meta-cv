@@ -135,7 +135,7 @@ class OpenHashtagManager{
       this.closeHashtag();
     } else {
       Map<String, String> httpheader = new Map<String,String>();
-      httpheader['X_REQUESTED_WITH'] = 'XMLHttpRequest';
+      httpheader['X-Requested-With'] = 'XMLHttpRequest';
       HttpRequest.request(getURL(this.current_hashtag_id, this.next_feature_id), requestHeaders:httpheader)
         .then((HttpRequest featurejson_raw){
           Map featurejson = JSON.decode(featurejson_raw.response);
@@ -147,7 +147,7 @@ class OpenHashtagManager{
 
   void showHashtag(String hashtag_id){
     Map<String, String> httpheader = new Map<String,String>();
-    httpheader['X_REQUESTED_WITH'] = 'XMLHttpRequest';
+    httpheader['X-Requested-With'] = 'XMLHttpRequest';
     HttpRequest.request(getURL(hashtag_id), requestHeaders:httpheader)
       .then((HttpRequest hashtagjson_raw) {
         Map hashtagjson = JSON.decode(hashtagjson_raw.response);
