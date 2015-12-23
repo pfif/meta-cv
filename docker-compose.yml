@@ -1,0 +1,18 @@
+db:
+  image: postgres:9.4 
+  volumes_from: 
+    - dbdata
+  environment:
+    - POSTGRES_PASSWORD=pLTm3gAyZi9KNXQ2n9ZEN4EQzTmbg4emmDkyEiq82KpDXpVFTe
+    - POSTGRES_USER=monsieurarbre
+    - POSTGRES_DB=metacvserver
+
+dbdata:
+  image: busybox
+  volumes: 
+    - /var/lib/postgresql/data
+
+web:
+  build: metacvserver/
+  links: 
+    - db

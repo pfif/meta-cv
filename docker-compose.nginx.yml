@@ -1,0 +1,6 @@
+nginx:
+  image: nginx:1.9
+  expose:
+    - 80
+  links: 
+    - web
