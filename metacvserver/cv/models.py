@@ -19,11 +19,13 @@ class Feature(models.Model):
     id = models.SlugField(primary_key=True)
     title = models.CharField(max_length=50)
     description = models.TextField()
+    employer = models.ForeignKey("Employer")
 
     @property
     def representation(self):
         """Return the basic HTML representation of the Feature"""
-        ctx = Context({"feature" : self})
+        ctx = Context({"feature" : self,
+                       "employer" : self.employer.representation})
         return get_template("textfeature.html").render(ctx)
 
     def __str__(self):
@@ -76,3 +78,38 @@ class Link(models.Model):
     def __str__(self):
         return self.hashtag.__str__()+"=>"+self.feature.__str__()
 admin.site.register(Link)
+
+class Employer(models.Model):
+    """An Employer for which a Feature was done.
+
+    Provide its own html representation.
+    """
+    id = models.SlugField(primary_key=True)
+    name = models.CharField(max_length=40)
+    description = models.TextField(blank=True)
+    website = models.URLField()
+    logo = models.ImageField(upload_to="cv/logos/", blank=True)
+    recommendation = models.ForeignKey("Recommendation", blank=True, null=True)
+
+    @property
+    def representation(self):
+        """Provide a html representation of the employer"""
+        ctx = Context({'employer' : self})
+        return get_template("employer.html").render(ctx)
+
+    def __str__(self):
+        return self.name
+admin.site.register(Employer)
+
+class Recommendation(models.Model):
+    """A recommendation written by an Employer.
+
+    This can exists only in relation to an Employer
+    """
+    author_name = models.CharField(max_length=100)
+    author_email = models.EmailField(blank=True)
+    body = models.TextField()
+
+    def __str__(self):
+        return self.author_name
+admin.site.register(Recommendation)

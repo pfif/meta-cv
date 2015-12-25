@@ -52,7 +52,7 @@ def rm():
     _compose_command("rm web db")
 
 def rm_db():
-    _compose_command("rm dbdata")
+    _compose_command("rm dbdata webmedia")
 
 def logs(container):
     _compose_command("logs "+container)

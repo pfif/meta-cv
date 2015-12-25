@@ -1,0 +1,20 @@
+<div class="employer">
+    <h3>Employer</h3>
+    <a href="{{employer.website}}">
+    {% if employer.logo %}
+    <img src="{{employer.logo.url}}" alt="{{employer.name}}'s logo"/>
+    {% endif %}
+    <p class="name">{{employer.name}}</p>
+    </a>
+    {% if employer.description or employer.recommendation %}
+    <input type="button" value="More about employer" class="more_btn">
+    {% if employer.description %}
+    <h4 class="hidden">Description</h4>
+    <p class="description hidden">{{employer.description}}</p>
+    {% endif %}
+    {% if employer.recommendation %}
+    <h4 class="recommendation_name hidden"> Recommendation by {{employer.recommendation.author_name}} ({{employer.recommendation.author_email}})</h4>
+    <p class="recommendation_body hidden">{{employer.recommendation.body}}</p>
+    {% endif %}
+    {% endif %}
+</div>

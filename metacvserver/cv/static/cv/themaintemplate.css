@@ -69,7 +69,7 @@ header h1+p{
 }
 
 
-#state_mainpage > div > a:hover, #next_hashtag:hover{
+#state_mainpage > div > a:hover, #next_hashtag:hover, .employer a p:hover{
   text-decoration:underline; 
 }
 
@@ -120,11 +120,14 @@ header h1+p{
 }
 
 #state_openhashtag > div > a[href="/"]:not(#next_hashtag){
-  float:right;
   background-color:black;
   color:white;
   text-decoration:none;
   padding:5px
+}
+
+#state_openhashtag > div > a[href="/"]:not(#next_hashtag){
+  float:right;
 }
 
 #feature_representation h2, #feature_representation p{
@@ -134,6 +137,7 @@ header h1+p{
 
 #feature_representation h2{
   margin-bottom:10px !important;
+  font-size: 1.5rem;
 }
 
 #main_representation {
@@ -146,4 +150,51 @@ header h1+p{
   background-color:#d2d2d2;
   margin:0;
   padding:5px;
+}
+
+#feature_representation .employer .hidden{
+  display: none;
+}
+
+.employer{
+    border-top: dotted 3px black;
+    margin-top: 20px;
+    padding-top: 10px;
+} 
+
+.employer a{
+    color: initial;
+    text-decoration: none;
+}
+
+.employer h3{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 0.8rem;
+    text-align: right;
+    float: right;
+}
+
+.employer img, .employer .name{
+    height: 1.3rem;
+    font-size: 1.3rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.employer img{
+    margin-right: 10px;
+}
+
+.employer h4{
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.employer input{
+  width: 100%;
+  display: block;
+  border: none;
+  background-color:#e8e8e8;
+  margin-top: 10px;
 }
