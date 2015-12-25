@@ -16,3 +16,10 @@ web:
   build: metacvserver/
   links: 
     - db
+  volumes_from:
+    - webmedia 
+
+webmedia:
+  image: busybox
+  volumes:
+    - /var/django/metacvserver_media/

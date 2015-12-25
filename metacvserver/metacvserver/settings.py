@@ -88,3 +88,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     '/var/django/metacvserver_compiledjs/'
 ]
+MEDIA_ROOT = '/var/django/metacvserver_media/'
+MEDIA_URL = '/media/'

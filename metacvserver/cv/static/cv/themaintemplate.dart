@@ -100,7 +100,11 @@ class OpenHashtagManager{
   */
   void _loadFeature(Map featurejson){
     this.current_feature_id = featurejson['id'];
-    querySelector("#feature_representation").innerHtml = featurejson['representation'];
+    querySelector("#feature_representation").setInnerHtml(
+        featurejson['representation'], 
+        treeSanitizer : NodeTreeSanitizer.trusted
+    );
+    create_showMore(querySelector("#feature_representation"));
     
     if(featurejson['next_feature_id'] != "CLOSE"){
       this.next_feature_id = featurejson['next_feature_id']; 
@@ -165,3 +169,19 @@ class OpenHashtagManager{
   }
 }
 
+void create_showMore(Element feature_representation){
+    Element more_btn = feature_representation.querySelector(".employer .more_btn");
+    if(more_btn != null){
+        more_btn.onClick.listen(
+            (Event e){
+                e.preventDefault(); 
+                feature_representation.querySelectorAll(".more_btn ~ .hidden").forEach(
+                    (Element e){
+                        e.classes.remove("hidden");
+                    }
+                );
+                more_btn.classes.add("hidden");
+            }
+        );
+    }
+}
