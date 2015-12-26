@@ -79,7 +79,7 @@ def feature(request, hashtag_id, feature_id):
         response = dict()
         response['id'] = feature.id
         response['representation'] = (
-            feature.link_set.get(hashtag=hashtag).getrepresentation()
+            feature.link_set.get(hashtag=hashtag).representation
         )
         if next_feature != None:
             response['next_feature_id'] = next_feature.id
