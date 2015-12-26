@@ -37,7 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sass_processor',
-    'cv'
+    'cv',
+    'video'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -87,7 +88,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    '/var/django/metacvserver_compiledjs/'
+    '/var/django/metacvserver_compiledjs/',
+    'common/'
 ]
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -99,3 +101,6 @@ MEDIA_URL = '/media/'
 
 SASS_PROCESSOR_ROOT = "/var/django/metacvserver_compiledcss/"
 SASS_OUTPUT_STYLE = "compressed"
+SASS_PROCESSOR_INCLUDE_DIRS = (
+    'common/',
+)

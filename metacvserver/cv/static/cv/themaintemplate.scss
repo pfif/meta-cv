@@ -1,11 +1,4 @@
-$breakpoint-tablet: 769;
-$breakpoint-mobile: 415;
-
-$desktop: "screen and (min-width: #{$breakpoint-tablet}px)";
-$tablet: "screen and (max-width: #{$breakpoint-tablet}px) and (min-width: #{$breakpoint-mobile}px)";
-$mobile: "screen and (max-width: #{$breakpoint-mobile}px)";
-
-$gap: 1.25em;
+@import 'common_design.scss';
 
 /*Position*/
 .block{
@@ -205,10 +198,7 @@ header h1+p{
 }
 
 #state_openhashtag > div > a[href="/"]:not(#next_hashtag){
-  background-color:black;
-  color:white;
-  text-decoration:none;
-  padding:5px;
+    @include button;
 }
 
 #state_openhashtag > div > a[href="/"]:not(#next_hashtag){
@@ -291,4 +281,20 @@ header h1+p{
   border: none;
   background-color:#e8e8e8;
   margin-top: 10px;
+}
+
+body{
+  transition-property: background-color;
+  transition-duration:300ms;
+  
+  &.video_only{
+      background-color: #333333;
+
+      @media #{$mobile}{
+          header p, header h1, > div, > footer{
+              display: none;
+          }
+      }
+  }
+
 }

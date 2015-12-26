@@ -1,4 +1,4 @@
 web:
-  command: ["sh", "-c", "pylint --rcfile=.pylintrc -f html cv/ metacvserver/ > /var/tmp/pylint.html"]
+  command: ["sh", "-c", "pylint --rcfile=.pylintrc -f html video/ cv/ metacvserver/ > /var/tmp/pylint.html"]
   volumes:
     - ./tmp/:/var/tmp/

@@ -1,6 +1,7 @@
 import 'dart:html';
 import 'dart:async';
 import 'dart:convert' show JSON;
+import 'package:metacvserver_common/openclose.dart' show StateManager;
 
 String getURL(String hashtagid, [String featureid]){
   String url = "/"+hashtagid+"/";
@@ -9,42 +10,6 @@ String getURL(String hashtagid, [String featureid]){
   }
 
   return url;
-}
-
-//Take care of switching between the states
-class StateManager{
-  Element div_state_mainpage;
-  Element div_state_openhashtag;
-  
-  //Singleton
-  static StateManager instance = new StateManager(querySelector("#state_mainpage"), querySelector("#state_openhashtag"));
-  static getInstance(){
-    return instance;
-  }
-
-  StateManager(Element div_state_mainpage, Element div_state_openhashtag){
-    this.div_state_mainpage = div_state_mainpage;
-    this.div_state_openhashtag = div_state_openhashtag;
-  }
-
-  //Show element if it is equal to e
-  void _showelementif(Element e, Element element){
-    if(e == element){
-      element.classes.remove("hidden");
-    } else {
-      element.classes.add("hidden");
-    }
-  }
-
-  void switch_tomainpage(){
-    _showelementif(div_state_mainpage, div_state_mainpage);
-    _showelementif(div_state_mainpage, div_state_openhashtag);
-  }
-
-  void switch_toopenhashtag(){
-    _showelementif(div_state_openhashtag, div_state_mainpage);
-    _showelementif(div_state_openhashtag, div_state_openhashtag);
-  }
 }
 
 /*Loads data from the server and enter it in the Open Hashtag State
@@ -64,11 +29,13 @@ class OpenHashtagManager{
     this.current_feature_id = null;
     this.next_feature_id = null;
 
-    statemanager.switch_tomainpage();
+    statemanager.close();
   }
 
   //Singleton
-  static OpenHashtagManager instance = new OpenHashtagManager(StateManager.getInstance());
+  static OpenHashtagManager instance = new OpenHashtagManager(
+      new StateManager(querySelector("#state_mainpage"), querySelector("#state_openhashtag"))
+  );
 
   static getInstance(){
     return instance;
@@ -119,11 +86,11 @@ class OpenHashtagManager{
       linknext.href = "/";
     }
     window.history.replaceState("cityoftinylight", "", getURL(this.current_hashtag_id, this.current_feature_id));
-    statemanager.switch_toopenhashtag();
+    statemanager.open();
   }
 
   void closeHashtag(){
-    this.statemanager.switch_tomainpage();
+    this.statemanager.close();
 
     this.current_hashtag_id = null;
     this.current_feature_id = null;
