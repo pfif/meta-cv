@@ -67,3 +67,6 @@ packages
 
 # Include when developing application packages.
 pubspec.lock
+
+#tmp folder where pylint's test result are written
+tmp/
