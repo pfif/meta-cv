@@ -1,0 +1,17 @@
+$breakpoint-tablet: 769;
+$breakpoint-mobile: 415;
+
+$desktop: "screen and (min-width: #{$breakpoint-tablet}px)";
+$tablet: "screen and (max-width: #{$breakpoint-tablet}px) and (min-width: #{$breakpoint-mobile}px)";
+$mobile: "screen and (max-width: #{$breakpoint-mobile}px)";
+
+$gap: 1.25em;
+
+@mixin button{
+  background-color:black;
+  color:white;
+  text-decoration:none;
+  padding:5px;
+  border: none;
+  font-size: 1em;
+}

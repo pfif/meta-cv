@@ -7,12 +7,14 @@
     <title>{% trans "My meta-cv"%}</title>
     <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% sass_src 'cv/themaintemplate.scss' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% sass_src 'video/video.scss' %}" type="text/css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
     <header>
         <h1>{% trans "Florent Pastor's meta-cv"%}</h1>
         <p>{% trans "20 years old, french developper."%}</p>
+        {{video}}
     </header>
     <div class="block" id="state_mainpage" >
       <div>
@@ -43,6 +45,7 @@
     </script>
     {%endif%}
     <script type="application/dart" src="{% static "cv/themaintemplate_bootstrap.dart"%}"> </script>
+    <script type="application/dart" src="{% static "video/video_bootstrap.dart"%}"> </script>
     <script type="text/javascript">
     if (navigator.userAgent.indexOf('(Dart)') === -1) {
         var scripts = document.getElementsByTagName("script");

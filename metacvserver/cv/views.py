@@ -12,6 +12,8 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView, View
 
+from video.models import VideoIntroduction
+
 from cv.models import Hashtag, Feature
 
 class FetchObjectsMixin:
@@ -44,6 +46,9 @@ class TheMainTemplateView(ListView, FetchObjectsMixin):
             ctx['hashtag'] = self.hashtag
             ctx['feature'] = self.feature if self.feature != None\
                 else self.hashtag.features.all()[0]
+
+        ctx['video'] = VideoIntroduction.objects.get(
+            current=True).representation
 
         return ctx
 

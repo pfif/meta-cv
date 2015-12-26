@@ -1,0 +1,39 @@
+@import 'common_design.scss';
+
+#video_introduction .hidden{
+    display: none;
+}
+
+#video_introduction{
+    margin-top: $gap;
+}
+
+#video_introduction .countdown{
+    color: white;
+    margin-top: $gap/2;
+}
+
+#video_introduction .close_btn{
+    display: block;
+    @include button;
+
+    .video_only &{
+        background-color: white;
+        color: black;
+    }
+
+    margin-left: auto;
+    margin-right: auto;
+
+    margin-bottom: $gap/2;
+}
+
+#video_introduction .open_btn{
+    @include button;
+}
+
+#video_introduction .video{
+    @media #{$tablet}, #{$mobile}{
+        width:100%;
+    }
+}
