@@ -20,7 +20,8 @@ class Feature(models.Model):
     title = models.CharField(max_length=50)
     description = models.TextField()
 
-    def getrepresentation(self):
+    @property
+    def representation(self):
         """Return the basic HTML representation of the Feature"""
         ctx = Context({"feature" : self})
         return get_template("textfeature.html").render(ctx)
@@ -57,16 +58,18 @@ class Link(models.Model):
 
     explanation = models.TextField()
 
-    def getexplanationrepresentation(self):
+    @property
+    def explanationrepresentation(self):
         """Get the representation of the explanation to the link only"""
         ctx = Context({"representation": self.explanation})
         return get_template("textlink.html").render(ctx)
 
-    def getrepresentation(self):
+    @property
+    def representation(self):
         """Return the Feature's representation in relation to the Hashtag."""
         ctx = Context(
-            {'main_representation' : self.feature.getrepresentation(),
-             'explanation' : self.getexplanationrepresentation()}
+            {'main_representation' : self.feature.representation,
+             'explanation' : self.explanationrepresentation}
         )
         return get_template("representation_feature.html").render(ctx)
 
