@@ -16,7 +16,7 @@
       <div>
         <p>{%trans "Discover my experiences, categorized by #skills."%}</p>
         <p class="hashtags">
-            {% for hashtag in hashtags %}
+            {% for hashtag in hashtag_list %}
             <a href="/{{hashtag.id}}/">#{{hashtag.id}}</a>
             {% endfor %}
         </p>
