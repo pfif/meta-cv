@@ -10,9 +10,12 @@ RUN pip3 install uwsgi pylint
 
 RUN pip3 install django==1.9 psycopg2==2.6
 
-ADD . /var/django/metacvserver/
-
 WORKDIR /var/django/metacvserver/
 
+ADD cv/static/cv/*.dart ./cv/static/cv/
 RUN mkdir -p /var/django/metacvserver_compiledjs/cv/
 RUN /usr/lib/dart/bin/dart2js -vm --out=/var/django/metacvserver_compiledjs/cv/themaintemplate_bootstrap.js cv/static/cv/themaintemplate_bootstrap.dart
+
+ADD . /var/django/metacvserver/
+
+
