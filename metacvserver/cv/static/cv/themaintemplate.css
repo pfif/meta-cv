@@ -123,12 +123,13 @@ header h1+p{
   background-color:black;
   color:white;
   text-decoration:none;
-  padding:5px
+  padding:5px;
 }
 
 #state_openhashtag > div > a[href="/"]:not(#next_hashtag){
   float:right;
 }
+
 
 #feature_representation h2, #feature_representation p{
   margin:0;
