@@ -10,7 +10,8 @@ RUN apt-get -y update; apt-get -y install dart
 
 RUN pip3 install uwsgi pylint
 
-RUN pip3 install django==1.9 psycopg2==2.6 pillow==3.0.0
+RUN pip3 install django==1.9 psycopg2==2.6 pillow==3.0.0 \
+django-sass-processor==0.3.3 libsass==0.10.0
 
 WORKDIR /var/django/metacvserver/
 
@@ -18,5 +19,7 @@ ADD cv/static/cv/*.dart ./cv/static/cv/
 RUN mkdir -p /var/django/metacvserver_compiledjs/cv/
 RUN /usr/lib/dart/bin/dart2js --no-source-maps -vm --out=/var/django/metacvserver_compiledjs/cv/themaintemplate_bootstrap.js cv/static/cv/themaintemplate_bootstrap.dart
 RUN rm cv/static/cv/*.dart
+
+RUN mkdir -p /var/django/metacvserver_compiledcss/
 
 ADD . /var/django/metacvserver/

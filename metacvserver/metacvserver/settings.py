@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'sass_processor',
     'cv'
 )
 
@@ -84,9 +85,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATIC_ROOT = '/var/django/metacvserver_static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     '/var/django/metacvserver_compiledjs/'
 ]
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'sass_processor.finders.CssFinder',
+)
 MEDIA_ROOT = '/var/django/metacvserver_media/'
 MEDIA_URL = '/media/'
+
+SASS_OUTPUT_STYLE = "compressed"
