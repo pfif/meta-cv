@@ -32,17 +32,6 @@ class OpenHashtagManager{
     statemanager.close();
   }
 
-  //Singleton
-  static OpenHashtagManager instance = new OpenHashtagManager(
-      new StateManager(querySelector("#state_mainpage"), querySelector("#state_openhashtag"))
-  );
-
-  static getInstance(){
-    return instance;
-  }
-  
-  
-  
   //MANAGEMENT METHODS
 
   /*Switch to the Open Hashtag State, 
