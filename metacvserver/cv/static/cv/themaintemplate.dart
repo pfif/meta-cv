@@ -1,6 +1,6 @@
-import 'dart:html';
-import 'dart:async';
 import 'dart:convert' show JSON;
+import 'dart:html' show Element, window, querySelector, Event, HttpRequest,
+NodeTreeSanitizer, LinkElement;
 import 'package:metacvserver_common/openclose.dart' show StateManager;
 
 String getURL(String hashtagid, [String featureid]){
@@ -67,7 +67,7 @@ class OpenHashtagManager{
     } else {
       this.next_feature_id = null;
     }
-    ElementLink linknext = querySelector("#next_hashtag");
+    LinkElement linknext = querySelector("#next_hashtag");
 
     if(this.next_feature_id != null){
       linknext.href = this.next_feature_id;

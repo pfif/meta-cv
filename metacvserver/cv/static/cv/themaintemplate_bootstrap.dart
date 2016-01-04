@@ -1,6 +1,6 @@
-import 'dart:js';
-import 'themaintemplate.dart';
-import 'dart:html';
+import 'dart:js' show context;
+import 'themaintemplate.dart' show OpenHashtagManager;
+import 'dart:html' show querySelector, querySelectorAll, Event, Element;
 import 'package:metacvserver_common/openclose.dart' show StateManager;
 
 //A file linked to the HTML to change the state at start up.
