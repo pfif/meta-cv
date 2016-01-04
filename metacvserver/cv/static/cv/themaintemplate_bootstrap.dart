@@ -1,10 +1,15 @@
 import 'dart:js';
 import 'themaintemplate.dart';
 import 'dart:html';
+import 'package:metacvserver_common/openclose.dart' show StateManager;
+
 //A file linked to the HTML to change the state at start up.
 void main(){
   //Initialisation of the page
-  OpenHashtagManager hashtagmanager = OpenHashtagManager.getInstance();
+  OpenHashtagManager hashtagmanager = new OpenHashtagManager(
+      new StateManager(querySelector("#state_mainpage"), 
+          querySelector("#state_openhashtag"))
+  );
   
   //Every hashtag links allow to load hashtag.
   for(Element link in querySelectorAll("#state_mainpage a")){
