@@ -19,12 +19,12 @@ ADD common common
 
 ADD cv/static/cv/*.dart ./cv/static/cv/
 RUN mkdir -p /var/django/metacvserver_compiledjs/cv/
-RUN /usr/lib/dart/bin/dart2js --no-source-maps -m -pcommon/ --out=/var/django/metacvserver_compiledjs/cv/themaintemplate_bootstrap.js cv/static/cv/themaintemplate_bootstrap.dart
+RUN /usr/lib/dart/bin/dart2js --no-source-maps -m --fatal-warnings -pcommon/ --out=/var/django/metacvserver_compiledjs/cv/themaintemplate_bootstrap.js cv/static/cv/themaintemplate_bootstrap.dart
 RUN rm cv/static/cv/*.dart
 
 ADD video/static/video/*.dart ./video/static/video/
 RUN mkdir -p /var/django/metacvserver_compiledjs/video/
-RUN /usr/lib/dart/bin/dart2js --no-source-maps -m -pcommon/ --out=/var/django/metacvserver_compiledjs/video/video_bootstrap.js video/static/video/video_bootstrap.dart
+RUN /usr/lib/dart/bin/dart2js --no-source-maps -m --fatal-warnings -pcommon/ --out=/var/django/metacvserver_compiledjs/video/video_bootstrap.js video/static/video/video_bootstrap.dart
 RUN rm video/static/video/*.dart
 
 RUN rm common/metacvserver_common/*.dart
