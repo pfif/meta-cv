@@ -11,7 +11,9 @@ class Video{
     Element countdown;
 
     JsObject yt_player;
+    bool yt_player_ready;
     String youtube_id;
+
     int end_introduction;
 
     StateManager statemanager;
@@ -47,6 +49,7 @@ class Video{
         this.countdown = this.root.querySelector(".countdown");
 
         this.youtube_id = this.video.dataset['ytid'];
+        this.yt_player_ready = false;
         this.end_introduction = int.parse(this.video.dataset['endintroduction']);
 
         Video.createYoutubeScript();
@@ -73,13 +76,13 @@ class Video{
     Element get video => this.video_container.querySelector(".video");
 
     void play(){
-        if(this.yt_player != null && this.statemanager.isOpened()){
+        if(this.is_yt_player_ready() && this.statemanager.isOpened()){
             this.yt_player.callMethod('playVideo');
         }
     }
 
     void stop(){
-        if(this.yt_player != null){
+        if(this.is_yt_player_ready()){
             this.yt_player.callMethod('pauseVideo');
         }
     }
@@ -91,6 +94,7 @@ class Video{
                 'videoId': this.youtube_id,
                 'events': {
                     'onReady': (JsObject e){ 
+                        this.yt_player_ready = true;
                         this.play(); 
                         this.create_timer_endofintroduction();
                     },
@@ -103,6 +107,10 @@ class Video{
             })
         ]);
 
+    }
+
+    bool is_yt_player_ready(){
+        return this.yt_player != null && this.yt_player_ready;
     }
 
     Timer timer_endofintroduction;
