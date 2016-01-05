@@ -11,6 +11,8 @@ import json
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import ListView, View
+from django.template import Context
+from django.template.loader import get_template
 
 from video.models import VideoIntroduction
 
@@ -30,27 +32,24 @@ class FetchObjectsMixin:
             Feature, pk=self.kwargs['feature_id']
         ) if "feature_id" in self.kwargs else None
 
-class TheMainTemplateView(ListView, FetchObjectsMixin):
-    """Serves themaintemplate.html and make sure it has the needed variables in
-       context"""
-    model = Hashtag
-    template_name = "themaintemplate.html"
+class TheMainTemplateHTMLGenerator(FetchObjectsMixin):
+    def __init__(self, kwargs):
+        self.kwargs = kwargs
+        self.fetch_objects()
 
-    def get_context_data(self):
+    def generate_html(self):
         """Feed the context with the Hashtag requested, opened either at the
            requested feature or at the its first feature """
-        ctx = super(TheMainTemplateView, self).get_context_data()
-        self.fetch_objects()
+        ctx = Context({
+            'hashtag_list': Hashtag.objects.all()
+        })
 
         if self.hashtag != None:
             ctx['hashtag'] = self.hashtag
             ctx['feature'] = self.feature if self.feature != None\
                 else self.hashtag.features.all()[0]
 
-        ctx['video'] = VideoIntroduction.objects.get(
-            current=True).representation
-
-        return ctx
+        return get_template("cv/skeleton.html").render(ctx)
 
 #The views
 class AjaxView(View, FetchObjectsMixin):
@@ -98,15 +97,3 @@ class FeatureAjaxView(AjaxView):
             ),
         }
 
-def switch_ajax(ajax_classbasedview):
-    """Returns a view.
-       This view will pass the request to another view. It chooses this view by
-       checking if the request is done by an ajax client."""
-    def view(request, *args, **kwargs):
-        view = None
-        if request.is_ajax():
-            view = ajax_classbasedview.as_view()
-        else:
-            view = TheMainTemplateView.as_view()
-        return view(request, *args, **kwargs)
-    return view

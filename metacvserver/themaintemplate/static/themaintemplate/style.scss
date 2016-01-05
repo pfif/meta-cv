@@ -1,0 +1,88 @@
+@import 'common_design.scss';
+
+
+.block{
+  width: -moz-available;
+  width: -webkit-fill-available;
+}
+
+footer, header{
+    @media #{$desktop}, #{$tablet}{
+        @include wideblock;
+    }
+    text-align: center;
+}
+
+header{
+    padding-bottom: $gap;
+}
+
+footer, .block{
+    padding-top: $gap;
+    padding-bottom: $gap;
+
+    > p{
+        padding: 0px;
+        margin: 0px;
+    }
+}
+
+*{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+body{
+    @media #{$desktop}{
+        font-size: 16px;
+    }
+    @media #{$tablet}{
+        font-size: 21px;
+    }
+    @media #{$mobile}{
+        font-size: 20px;
+    }
+}
+
+header{
+  border-bottom: 2px dotted black;
+}
+
+footer{
+  border-top : 2px dotted black;
+}
+
+header h1{
+  @media #{$desktop}{
+      font-size:3em; 
+  }
+  @media #{$tablet}{
+      font-size:2em; 
+  }
+  @media #{$mobile}{
+      font-size:1.61em; 
+  }
+  margin-bottom:2px;
+}
+
+header .subtitle{
+  margin:0px;
+  font-style: italic;
+}
+
+body{
+  transition-property: background-color;
+  transition-duration:300ms;
+  
+  //Tie in with the video module
+  &.video_only{
+      background-color: #333333;
+
+      @media #{$mobile}{
+          header p, header h1, > div, > footer{
+              display: none;
+          }
+      }
+  }
+
+}
+

@@ -26,7 +26,7 @@ class Feature(models.Model):
         """Return the basic HTML representation of the Feature"""
         ctx = Context({"feature" : self,
                        "employer" : self.employer.representation})
-        return get_template("textfeature.html").render(ctx)
+        return get_template("cv/textfeature.html").render(ctx)
 
     def __str__(self):
         return self.id
@@ -64,7 +64,7 @@ class Link(models.Model):
     def explanationrepresentation(self):
         """Get the representation of the explanation to the link only"""
         ctx = Context({"representation": self.explanation})
-        return get_template("textlink.html").render(ctx)
+        return get_template("cv/textlink.html").render(ctx)
 
     @property
     def representation(self):
@@ -73,7 +73,7 @@ class Link(models.Model):
             {'main_representation' : self.feature.representation,
              'explanation' : self.explanationrepresentation}
         )
-        return get_template("representation_feature.html").render(ctx)
+        return get_template("cv/representation_feature.html").render(ctx)
 
     def __str__(self):
         return self.hashtag.__str__()+"=>"+self.feature.__str__()
@@ -95,7 +95,7 @@ class Employer(models.Model):
     def representation(self):
         """Provide a html representation of the employer"""
         ctx = Context({'employer' : self})
-        return get_template("employer.html").render(ctx)
+        return get_template("cv/employer.html").render(ctx)
 
     def __str__(self):
         return self.name

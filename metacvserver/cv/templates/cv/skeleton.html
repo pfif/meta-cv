@@ -1,0 +1,26 @@
+{% load i18n %}
+    <div class="block" id="state_mainpage" >
+      <div>
+        <p>{%trans "Discover my experiences, categorized by #skills."%}</p>
+        <p class="hashtags">
+            {% for hashtag in hashtag_list %}
+            <a href="/{{hashtag.id}}/">#{{hashtag.id}}</a>
+            {% endfor %}
+        </p>
+      </div>
+    </div>
+    <div class="block" id="state_openhashtag">
+      <div>
+        <a href="/">Close</a>
+        <h1>#<span id="hashtag_title"></span></h1>
+        <p>experience</p>
+        <div id="feature_representation"></div>
+        <a href="" id="next_hashtag">{% trans "Next" %}</a>
+      </div>
+    </div>
+    {% if hashtag or feature %}
+    <script type="text/javascript">
+    HASHTAG_ID = "{{hashtag.id}}"
+    FEATURE_ID = "{{feature.id}}"
+    </script>
+    {%endif%}
