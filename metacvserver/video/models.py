@@ -32,7 +32,7 @@ class VideoIntroduction(models.Model):
         '''Return a HTML presentation of the video that can be inserted
           on any page that has video.dart'''
         ctx = Context({'video': self})
-        return get_template("video_introduction.html").render(ctx)
+        return get_template("video/video_introduction.html").render(ctx)
 
     def __str__(self):
         return "{nickname} ({youtube_id})".format(nickname=self.nickname,
