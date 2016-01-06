@@ -1,29 +1,34 @@
-from fabric.api import local, env
+from fabric.api import local, env, prompt, shell_env
 import time
 
 #Environments
-def _define_env(compose_files, name, webattached=False):
+def _define_env(compose_files, name, 
+                webattached=False, password=None):
     env.compose_files = compose_files
     env.project_name = name
     env.webattached = webattached
+    env.postgres_password = password if (password is not None) else prompt(
+        "Database password:")
     
 def localhost():
-    _define_env(["local"], "local", True)
+    _define_env(["local"], "local", True, "fakeAsth3$pecial3d1710|\|s")
 
 def pylint():
-    _define_env(["pylint"], "pylint", True)
+    _define_env(["pylint"], "pylint", True, "fakepassword")
 
 def production():
     _define_env(["production", "nginx"], "production")
 
 #Commands
 def _compose_command(command):
-    local("docker-compose -f docker-compose.yml {files} -p {project} {command}".format(
-        files = " ".join(["-f docker-compose.{name}.yml".format(name=name) 
-                          for name in env.compose_files]),
-        project = "metacv{name}".format(name = env.project_name),
-        command = command
-    ))
+    with shell_env(POSTGRES_PASSWORD=env.postgres_password):
+        local("docker-compose -f docker-compose.yml\
+              {files} -p {project} {command}".format(
+            files = " ".join(["-f docker-compose.{name}.yml".format(name=name) 
+                              for name in env.compose_files]),
+            project = "metacv{name}".format(name = env.project_name),
+            command = command
+        ))
 
 def _setup():
     _compose_command("build")

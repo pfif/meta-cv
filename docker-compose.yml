@@ -3,7 +3,7 @@ db:
   volumes_from: 
     - dbdata
   environment:
-    - POSTGRES_PASSWORD=pLTm3gAyZi9KNXQ2n9ZEN4EQzTmbg4emmDkyEiq82KpDXpVFTe
+    - POSTGRES_PASSWORD
     - POSTGRES_USER=monsieurarbre
     - POSTGRES_DB=metacvserver
 

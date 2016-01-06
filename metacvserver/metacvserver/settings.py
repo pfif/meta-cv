@@ -66,7 +66,7 @@ DATABASES = {
         'HOST': 'db',
         'NAME': 'metacvserver',
         'USER': 'monsieurarbre',
-        'PASSWORD' : 'pLTm3gAyZi9KNXQ2n9ZEN4EQzTmbg4emmDkyEiq82KpDXpVFTe'
+        'PASSWORD' : os.environ['POSTGRES_PASSWORD']
     }
 }
 
