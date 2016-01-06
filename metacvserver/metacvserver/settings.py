@@ -87,6 +87,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+STATIC_ROOT = '/var/django/metacvserver_static/'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     '/var/django/metacvserver_compiledjs/',
@@ -100,7 +101,6 @@ STATICFILES_FINDERS = (
 MEDIA_ROOT = '/var/django/metacvserver_media/'
 MEDIA_URL = '/media/'
 
-SASS_PROCESSOR_ROOT = "/var/django/metacvserver_compiledcss/"
 SASS_OUTPUT_STYLE = "compressed"
 SASS_PROCESSOR_INCLUDE_DIRS = (
     'common/',
