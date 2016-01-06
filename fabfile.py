@@ -35,6 +35,7 @@ def _setup():
     _compose_command("up -d db")
     time.sleep(10)
     _compose_command("run web python3.4 ./manage.py migrate")
+    _compose_command("run web python3.4 ./manage.py collectstatic --noinput")
 
 def up():
     _setup()

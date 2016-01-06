@@ -25,3 +25,4 @@ webmedia:
   image: busybox
   volumes:
     - /var/django/metacvserver_media/
+    - /var/django/metacvserver_static/
